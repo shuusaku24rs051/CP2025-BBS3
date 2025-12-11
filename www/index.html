@@ -248,7 +248,7 @@ function updatePost(postId) {
         updatedAt: firebase.database.ServerValue.TIMESTAMP
     };
 
-    postsRef.child(postId).remove()
+    postsRef.child(postId).update(updates)
     .then(() => {
         showMessage('投稿を更新しました');
         $(`#post-${postId}`).removeClass('editing');
@@ -268,7 +268,7 @@ function deletePost(postId) {
     const postElement = $(`#post-${postId}`);
     postElement.addClass('deleting');
 
-    postsRef.child(postId).update({content: '削除されました'})
+    postsRef.child(postId).remove()
     .then(() => {
         showMessage('投稿を削除しました');
     })
